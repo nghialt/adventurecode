@@ -29,5 +29,5 @@ compileTestKotlin {
 }
 
 application {
-    mainClassName = 'MainKt'
+    mainClassName = 'me.nghialt.MainKt'
 }
