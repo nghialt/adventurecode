@@ -1,9 +1,11 @@
 package main.kotlin;
 
 fun main() {
-//    println(INPUT.trim().split("\n"))
-    val ranges = Ranges(mutableListOf())
-    println(ranges)
+    val lines: List<String> = INPUT.split("\n")
+    val listRanges = constructRanges(lines)
+    val nearbyNum = parseNearby(lines)
+    val sum = nearbyNum.filter { num -> !isNumberCorrect(num, listRanges) }.sum()
+    println(sum)
 }
 
 fun helloWorld(): String {

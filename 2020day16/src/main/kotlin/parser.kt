@@ -27,7 +27,6 @@ fun parseNearby(input: List<String>): List<Int> {
     return input.slice(input.indexOf("nearby tickets:") + 1 until input.size)
         .asSequence()
         .filter { line -> line.isNotBlank() }
-        .onEach { line -> println("line $line") }
         .map { line -> line.split(",") }
         .flatten()
         .map { numStr -> numStr.toInt() }
