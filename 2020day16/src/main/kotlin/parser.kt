@@ -14,3 +14,11 @@ fun parseRangePair(value: String): Pair<Int, Int> {
 fun parseRangeRow(value: String): List<Pair<Int, Int>> {
     return parseRangeString(value).map { rangeStr -> parseRangePair(rangeStr) }
 }
+
+fun constructRanges(input: List<String>): List<Pair<Int, Int>> {
+    return input.takeWhile { line -> !line.startsWith("your ticket:") }
+        .filter { x -> x.isNotEmpty() }
+        .map { x -> parseRangeRow(x) }
+        .flatten()
+}
+
