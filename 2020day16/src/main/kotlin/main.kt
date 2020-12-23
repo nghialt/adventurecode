@@ -1,7 +1,9 @@
 package main.kotlin;
 
 fun main() {
-    println(helloWorld())
+//    println(INPUT.trim().split("\n"))
+    val ranges = Ranges(mutableListOf())
+    println(ranges)
 }
 
 fun helloWorld(): String {
