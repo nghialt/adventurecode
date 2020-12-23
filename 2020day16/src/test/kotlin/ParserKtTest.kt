@@ -3,6 +3,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import main.kotlin.parseRangePair
+import main.kotlin.parseRangeRow
 import main.kotlin.parseRangeString
 
 class ParserKtTest : StringSpec({
@@ -34,6 +35,17 @@ class ParserKtTest : StringSpec({
             ),
         ) { input, expect ->
             parseRangePair(input) shouldBe expect
+        }
+    }
+
+    "parse range row success" {
+        forAll(
+            row(
+                "arrival station: 25-562 or 568-968",
+                listOf(Pair(25, 562), Pair(568, 968)),
+            ),
+        ) { input, expect ->
+            parseRangeRow(input) shouldBe expect
         }
     }
 })

@@ -10,3 +10,7 @@ fun parseRangePair(value: String): Pair<Int, Int> {
     val arrNum = value.split("-")
     return Pair(arrNum[0].toInt(), arrNum[1].toInt())
 }
+
+fun parseRangeRow(value: String): List<Pair<Int, Int>> {
+    return parseRangeString(value).map { rangeStr -> parseRangePair(rangeStr) }
+}
