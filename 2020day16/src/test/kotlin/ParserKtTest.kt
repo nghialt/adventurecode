@@ -2,6 +2,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import main.kotlin.parseNearby
 import main.kotlin.parseRangePair
 import main.kotlin.parseRangeRow
 import main.kotlin.parseRangeString
@@ -46,6 +47,23 @@ class ParserKtTest : StringSpec({
             ),
         ) { input, expect ->
             parseRangeRow(input) shouldBe expect
+        }
+    }
+
+    "parse nearby" {
+        forAll(
+            row(
+                """
+97,103,89,191,73,79,83,101,151,71,149,53,181,59,61,67,113,109,107,127
+
+nearby tickets:
+895,527,676,768,695,821,473
+559,796,709,661,116,680,773
+               """,
+                listOf(895, 527, 676, 768, 695, 821, 473, 559, 796, 709, 661, 116, 680, 773),
+            ),
+        ) { input, expect ->
+            parseNearby(input.split("\n")) shouldBe expect
         }
     }
 })
