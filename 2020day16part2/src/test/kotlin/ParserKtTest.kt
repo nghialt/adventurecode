@@ -59,6 +59,7 @@ class ParserKtTest : StringSpec({
     "parse nearby" {
         forAll(
             row(
+                "case 1",
                 """
 97,103,89,191,73,79,83,101,151,71,149,53,181,59,61,67,113,109,107,127
 
@@ -66,13 +67,31 @@ nearby tickets:
 895,527,676,768,695,821,473
 559,796,709,661,116,680,773
                """,
+                listOf(Field("arrival station", listOf(Pair(25, 562), Pair(568, 968)))),
                 listOf(
                     listOf(895, 527, 676, 768, 695, 821, 473),
                     listOf(559, 796, 709, 661, 116, 680, 773)
                 ),
             ),
-        ) { input, expect ->
-            parseNearby(input.split("\n")) shouldBe expect
+            row(
+                "case 2",
+                """
+97,103,89,191,73,79,83,101,151,71,149,53,181,59,61,67,113,109,107,127
+
+nearby tickets:
+895,527,676,768,695,821,473
+559,796,709,661,116,680,773
+1,796,709,661,116,680,773
+               """,
+                listOf(Field("arrival station", listOf(Pair(25, 562), Pair(568, 968)))),
+                listOf(
+                    listOf(895, 527, 676, 768, 695, 821, 473),
+                    listOf(559, 796, 709, 661, 116, 680, 773)
+                ),
+            ),
+        ) { name, input, fields, expect ->
+            println(parseAndFilterNearby(input.split("\n"), fields))
+            parseAndFilterNearby(input.split("\n"), fields) shouldBe expect
         }
     }
 })
