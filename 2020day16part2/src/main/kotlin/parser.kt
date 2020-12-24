@@ -11,3 +11,7 @@ fun parseRangePair(value: String): Pair<Int, Int> {
     return Pair(arrNum[0].toInt(), arrNum[1].toInt())
 }
 
+fun parseFieldObject(line: String): Field {
+    val fieldStr = parseFieldString(line)
+    return Field(fieldStr.first, fieldStr.second.map { x -> parseRangePair(x) })
+}
