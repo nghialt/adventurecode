@@ -1,4 +1,5 @@
 
 rootProject.name = 'adventurecode2020'
 
-include '2020day16'
+include '2020day16part1'
+include '2020day16part2'
