@@ -2,9 +2,9 @@ package main.kotlin
 
 
 fun validateNearby(nearbyNums: List<Int>, fields: List<Field>): Boolean {
-    return nearbyNums.all { num ->
+    return nearbyNums.all {
         fields.any { f ->
-            f.ranges.any { p -> num >= p.first && num <= p.second }
+            f.ranges.any { p -> it >= p.first && it <= p.second }
         }
     }
 }

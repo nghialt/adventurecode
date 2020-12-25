@@ -16,12 +16,18 @@ fun parseFieldObject(line: String): Field {
     return Field(fieldStr.first, fieldStr.second.map { x -> parseRangePair(x) })
 }
 
+fun parseFields(lines: List<String>): List<Field> {
+    return lines.takeWhile { it.isNotEmpty() }
+        .map(::parseFieldObject)
+}
+
 fun parseAndFilterNearby(input: List<String>, fields: List<Field>): List<List<Int>> {
+    println("fields $fields")
     return input.slice(input.indexOf("nearby tickets:") + 1 until input.size)
         .asSequence()
-        .filter { line -> line.isNotBlank() }
-        .map { line -> line.split(",").map { numStr -> numStr.toInt() } }
-        .filter { line -> validateNearby(line, fields) }
+        .filter(String::isNotBlank)
+        .map { it.split(",").map(String::toInt) }
+        .filter { validateNearby(it, fields) }
         .toList()
 }
 
