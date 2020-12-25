@@ -11,31 +11,32 @@ internal class EngineKtTest : StringSpec({
             row(
                 "case 1",
                 listOf(
-                    listOf(5, 109),
-                    listOf(6, 108),
+                    listOf(3, 9, 18),
+                    listOf(15, 1, 5),
+                    listOf(5, 14, 9),
+                ),
+
+                listOf(
+                    Field("class", listOf(Pair(0, 1), Pair(4, 19))),
+                    Field("row", listOf(Pair(0, 5), Pair(8, 19))),
+                    Field("seat", listOf(Pair(0, 13), Pair(16, 19))),
                 ),
                 listOf(
-                    Field("a", listOf(Pair(1, 10), Pair(100, 110))),
-                    Field("b", listOf(Pair(8, 20), Pair(108, 120))),
-                ),
-                arrayOf(
-                    mutableSetOf("a"),
-                    mutableSetOf("a", "b"),
-                ),
-            ),
-            row(
-                "case 2",
-                listOf(
-                    listOf(9, 111),
-                    listOf(2, 20),
-                ),
-                listOf(
-                    Field("a", listOf(Pair(1, 10), Pair(100, 110))),
-                    Field("b", listOf(Pair(8, 20), Pair(108, 120))),
-                ),
-                arrayOf(
-                    mutableSetOf("a", "b"),
-                    mutableSetOf("b"),
+                    listOf(
+                        mutableSetOf("row", "seat"),
+                        mutableSetOf("class", "row", "seat"),
+                        mutableSetOf("class", "row", "seat"),
+                    ),
+                    listOf(
+                        mutableSetOf("class", "row"),
+                        mutableSetOf("class", "row", "seat"),
+                        mutableSetOf("class", "row", "seat"),
+                    ),
+                    listOf(
+                        mutableSetOf("class", "row", "seat"),
+                        mutableSetOf("class", "row"),
+                        mutableSetOf("class", "row", "seat"),
+                    ),
                 ),
             )
         ) { _, nearbyNums, fields, expected ->
