@@ -50,4 +50,65 @@ internal class EngineKtTest : StringSpec({
             constructAppearanceList(nearbyNums, fields) shouldBe expected
         }
     }
+
+    "statisticFieldsAppearance" {
+        forAll(
+            row(
+                "case 1",
+                AppearanceTable(
+                    listOf(
+                        AppearanceRow(
+                            listOf(
+                                AppearanceCell(setOf("row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                            )
+                        ),
+                        AppearanceRow(
+                            listOf(
+                                AppearanceCell(setOf("class", "row")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                            )
+                        ),
+                        AppearanceRow(
+                            listOf(
+                                AppearanceCell(setOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                            )
+                        ),
+                    )
+                ),
+                3,
+                AppearanceStatistic(
+                    listOf(
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 2),
+                                Pair("class", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 2),
+                                Pair("class", 3),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 3),
+                                Pair("class", 3),
+                            )
+                        ),
+                    )
+                ),
+            )
+        ) { _, appearance, fieldCount, expected ->
+            statisticFieldsAppearance(appearance, fieldCount) shouldBe expected
+        }
+    }
 })

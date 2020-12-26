@@ -16,6 +16,21 @@ fun constructAppearanceList(nearbyNums: List<List<Int>>, fields: List<Field>):
     )
 }
 
-//fun statisticFieldsAppearance(input: List<List<MutableSet<String>>>): List<ColumnStatistic> {
-//    return
-//}
+fun statisticFieldsAppearance(input: AppearanceTable, fieldCount: Int): AppearanceStatistic {
+    val tmpResult = List(fieldCount) { mutableMapOf<String, Int>() }
+
+    input.rows.forEach { row ->
+        row.cells.forEachIndexed { index, cell ->
+            cell.fields.forEach { field ->
+                val count = tmpResult[index].getOrDefault(field, 0) + 1
+                tmpResult[index][field] = count
+            }
+        }
+    }
+
+    return AppearanceStatistic(
+        tmpResult
+            .map { col -> col.toMap() }
+            .map { ColumnStatistic(it) }.toList()
+    )
+}
