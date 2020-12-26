@@ -8,7 +8,7 @@ fun constructAppearanceList(nearbyNums: List<List<Int>>, fields: List<Field>):
                 fields.filter { field ->
                     field.ranges.any { range -> it >= range.first && it <= range.second }
                 }.map(Field::fieldName)
-                    .toMutableSet()
+                    .toSortedSet()
             }.map { AppearanceCell(it) }
                 .toList()
         }.map { AppearanceRow(it) }

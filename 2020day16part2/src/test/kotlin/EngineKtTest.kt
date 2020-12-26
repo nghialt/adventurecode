@@ -24,23 +24,23 @@ internal class EngineKtTest : StringSpec({
                     listOf(
                         AppearanceRow(
                             listOf(
-                                AppearanceCell(mutableSetOf("row", "seat")),
-                                AppearanceCell(mutableSetOf("class", "row", "seat")),
-                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                                AppearanceCell(setOf("row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
                             )
                         ),
                         AppearanceRow(
                             listOf(
-                                AppearanceCell(mutableSetOf("class", "row")),
-                                AppearanceCell(mutableSetOf("class", "row", "seat")),
-                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
                             )
                         ),
                         AppearanceRow(
                             listOf(
-                                AppearanceCell(mutableSetOf("class", "row", "seat")),
-                                AppearanceCell(mutableSetOf("class", "row")),
-                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row", "seat")),
+                                AppearanceCell(setOf("class", "row")),
+                                AppearanceCell(setOf("class", "row", "seat")),
                             )
                         ),
                     )
