@@ -111,4 +111,106 @@ internal class EngineKtTest : StringSpec({
             statisticFieldsAppearance(appearance, fieldCount) shouldBe expected
         }
     }
+
+    "reduceFieldsStatistic" {
+        forAll(
+            row(
+                "case 1",
+                AppearanceStatistic(
+                    listOf(
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 2),
+                                Pair("class", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 2),
+                                Pair("class", 3),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 3),
+                                Pair("class", 3),
+                            )
+                        ),
+                    )
+                ),
+                "row",
+                2,
+                AppearanceStatistic(
+                    listOf(
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("seat", 2),
+                                Pair("class", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("seat", 2),
+                                Pair("class", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("seat", 2),
+                                Pair("class", 2),
+                            )
+                        ),
+                    )
+                ),
+            ),
+            row(
+                "case 1",
+                AppearanceStatistic(
+                    listOf(
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 2),
+                                Pair("seat", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("seat", 2),
+                            )
+                        ),
+                    )
+                ),
+                "row",
+                1,
+                AppearanceStatistic(
+                    listOf(
+                        ColumnStatistic(
+                            mapOf(
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("seat", 1),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("seat", 1),
+                            )
+                        ),
+                    )
+                ),
+            ),
+        ) { _, appStat, field, fieldCount, expected ->
+            reduceFieldsStatistic(appStat, field, fieldCount) shouldBe expected
+        }
+    }
 })

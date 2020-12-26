@@ -34,3 +34,19 @@ fun statisticFieldsAppearance(input: AppearanceTable, fieldCount: Int): Appearan
             .map { ColumnStatistic(it) }.toList()
     )
 }
+
+fun reduceFieldsStatistic(
+    input: AppearanceStatistic,
+    reduceField: String,
+    fieldCount: Int,
+): AppearanceStatistic {
+    return AppearanceStatistic(
+        input.colStats
+            .map { colStat ->
+                colStat.fieldMap
+                    .filter { entry -> entry.key != reduceField }
+                    .mapValues { fieldCount }
+                    .toMap()
+            }.map { ColumnStatistic(it) }
+    )
+}
