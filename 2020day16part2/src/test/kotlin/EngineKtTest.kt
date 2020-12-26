@@ -213,4 +213,60 @@ internal class EngineKtTest : StringSpec({
             reduceFieldsStatistic(appStat, field, fieldCount) shouldBe expected
         }
     }
+
+    "buildColumnCandidates" {
+        forAll(
+            row(
+                "case 1",
+                AppearanceStatistic(
+                    listOf(
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 2),
+                                Pair("class", 2),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 3),
+                                Pair("class", 3),
+                            )
+                        ),
+                        ColumnStatistic(
+                            mapOf(
+                                Pair("row", 3),
+                                Pair("seat", 2),
+                                Pair("class", 3),
+                            )
+                        ),
+                    )
+                ),
+                3,
+                listOf(
+                    ColumnCandidate(
+                        listOf(
+                            FieldCandidate("row", 0)
+                        ), 3
+                    ),
+                    ColumnCandidate(
+                        listOf(
+                            FieldCandidate("row", 2),
+                            FieldCandidate("class", 2),
+                        ), 6
+                    ),
+                    ColumnCandidate(
+                        listOf(
+                            FieldCandidate("row", 1),
+                            FieldCandidate("seat", 1),
+                            FieldCandidate("class", 1),
+                        ), 9
+                    ),
+                ),
+            ),
+        ) { _, appStat, fieldCount, expected ->
+            buildColumnCandidates(appStat, fieldCount) shouldBe expected
+        }
+    }
 })

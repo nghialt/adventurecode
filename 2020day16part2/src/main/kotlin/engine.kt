@@ -50,3 +50,20 @@ fun reduceFieldsStatistic(
             }.map { ColumnStatistic(it) }
     )
 }
+
+fun buildColumnCandidates(
+    input: AppearanceStatistic,
+    fieldCount: Int,
+): List<ColumnCandidate> {
+    return input.colStats
+        .map { colStat ->
+            colStat.fieldMap.filter { entry -> entry.value == fieldCount }
+                .toList()
+        }
+        .mapIndexed { index, list ->
+            ColumnCandidate(
+                list.map { FieldCandidate(it.first, index) },
+                list.sumOf { it.second },
+            )
+        }.sortedBy { it.score }
+}
