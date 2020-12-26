@@ -2,8 +2,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import main.kotlin.Field
-import main.kotlin.constructAppearanceList
+import main.kotlin.*
 
 internal class EngineKtTest : StringSpec({
     "constructAppearanceList" {
@@ -21,22 +20,30 @@ internal class EngineKtTest : StringSpec({
                     Field("row", listOf(Pair(0, 5), Pair(8, 19))),
                     Field("seat", listOf(Pair(0, 13), Pair(16, 19))),
                 ),
-                listOf(
+                AppearanceTable(
                     listOf(
-                        mutableSetOf("row", "seat"),
-                        mutableSetOf("class", "row", "seat"),
-                        mutableSetOf("class", "row", "seat"),
-                    ),
-                    listOf(
-                        mutableSetOf("class", "row"),
-                        mutableSetOf("class", "row", "seat"),
-                        mutableSetOf("class", "row", "seat"),
-                    ),
-                    listOf(
-                        mutableSetOf("class", "row", "seat"),
-                        mutableSetOf("class", "row"),
-                        mutableSetOf("class", "row", "seat"),
-                    ),
+                        AppearanceRow(
+                            listOf(
+                                AppearanceCell(mutableSetOf("row", "seat")),
+                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                            )
+                        ),
+                        AppearanceRow(
+                            listOf(
+                                AppearanceCell(mutableSetOf("class", "row")),
+                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                            )
+                        ),
+                        AppearanceRow(
+                            listOf(
+                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                                AppearanceCell(mutableSetOf("class", "row")),
+                                AppearanceCell(mutableSetOf("class", "row", "seat")),
+                            )
+                        ),
+                    )
                 ),
             )
         ) { _, nearbyNums, fields, expected ->
