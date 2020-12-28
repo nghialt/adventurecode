@@ -22,7 +22,6 @@ fun parseFields(lines: List<String>): List<Field> {
 }
 
 fun parseAndFilterNearby(input: List<String>, fields: List<Field>): List<List<Int>> {
-    println("fields $fields")
     return input.slice(input.indexOf("nearby tickets:") + 1 until input.size)
         .asSequence()
         .filter(String::isNotBlank)

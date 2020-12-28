@@ -3,3 +3,4 @@ rootProject.name = 'adventurecode2020'
 
 include '2020day16part1'
 include '2020day16part2'
+include '2020day19'
