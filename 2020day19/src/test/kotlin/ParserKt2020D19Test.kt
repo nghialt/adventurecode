@@ -4,7 +4,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import main.kotlin.*
 
-class ParserKtTest : StringSpec({
+class ParserKt2020D19Test : StringSpec({
 
     "parseOperationStr" {
         forAll(

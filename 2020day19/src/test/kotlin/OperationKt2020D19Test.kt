@@ -4,7 +4,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import main.kotlin.*
 
-class OperationKtTest : StringSpec({
+class OperationKt2020D19Test : StringSpec({
 
     "EqualOperation" {
         forAll(
