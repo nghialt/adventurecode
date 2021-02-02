@@ -3,11 +3,12 @@ package main.kotlin;
 fun main() {
     val input = INPUT
 //    val input = SAMPLE_INPUT
-    println(problem1(input))
+//    val input = SAMPLE_INPUT_1
+    println(problem2(input))
 }
 
 fun problem1(input: String): Long {
-    val instructions = parse(input)
+    val instructions = input.parse()
     var mask = ""
     var first1InMask = 0
     val memMap = mutableMapOf<Int, Long>()
@@ -15,18 +16,33 @@ fun problem1(input: String): Long {
         if (instruction is MaskUpdate) {
             mask = instruction.value
             mask.indexOfFirst { it == '1' }
-            print(mask)
             continue
         }
         val memUpdate = instruction as MemUpdate
-        memMap[memUpdate.position] = mask(memUpdate.value, mask, first1InMask)
-        println("memUpdate $memUpdate ${memMap[memUpdate.position]}")
+        memMap[memUpdate.position] = memUpdate.value.mask(mask, first1InMask)
     }
     return memMap
-//        .onEach { println(it) }
         .map { it.value }.sum()
 }
 
-fun problem2(input: String): Int {
-    return 0
+fun problem2(input: String): Long {
+    val instructions = input.parse()
+    var mask = ""
+    var first1InMask = 0
+    val memMap = mutableMapOf<Long, Long>()
+    for (instruction in instructions) {
+        if (instruction is MaskUpdate) {
+            mask = instruction.value
+            mask.indexOfFirst { it == '1' }
+            continue
+        }
+        val memUpdate = instruction as MemUpdate
+        val addressMask = memUpdate.position.maskAddress(mask)
+        val addresses = addressMask.generateAddressLong()
+        addresses.onEach {
+            memMap[it] = memUpdate.value
+        }
+    }
+    return memMap
+        .map { it.value }.sum()
 }

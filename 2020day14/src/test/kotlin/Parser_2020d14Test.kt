@@ -14,7 +14,7 @@ class Parser_2020d14Test : StringSpec({
                 MemUpdate(50776, 68004929),
             ),
         ) { _, input, expected ->
-            parseMemUpdate(input) shouldBe expected
+            input.parseMemUpdate() shouldBe expected
         }
     }
 })

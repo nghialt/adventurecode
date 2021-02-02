@@ -1,24 +1,24 @@
 package main.kotlin
 
-fun parse(input: String): List<Any> {
-    return input.split("\n")
+fun String.parse(): List<Any> {
+    return split("\n")
         .filter(String::isNotEmpty)
         .map {
             if (it.startsWith("mask")) {
-                parseMask(it)
+                it.parseMask()
             } else {
-                parseMemUpdate(it)
+                it.parseMemUpdate()
             }
         }
 }
 
-fun parseMask(input: String): MaskUpdate {
-    val arrSplit = input.split(" = ")
+fun String.parseMask(): MaskUpdate {
+    val arrSplit = split(" = ")
     return MaskUpdate(arrSplit[1])
 }
 
-fun parseMemUpdate(input: String): MemUpdate {
-    val arrSplit = input.split(" = ")
+fun String.parseMemUpdate(): MemUpdate {
+    val arrSplit = split(" = ")
     return MemUpdate(arrSplit[0].substring(4, arrSplit[0].length - 1).toInt(),
         arrSplit[1].toLong())
 }
