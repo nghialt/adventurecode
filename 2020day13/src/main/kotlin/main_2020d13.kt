@@ -28,6 +28,6 @@ fun problem1(input: String): Int {
 fun problem2(input: String): Int {
     val (_, busIDs) = parse(input)
 
-    val sameBuses = busIDs.filter {  }
+//    val sameBuses = busIDs.filter {  }
     return 0
 }

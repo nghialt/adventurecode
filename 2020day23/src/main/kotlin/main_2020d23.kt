@@ -43,21 +43,6 @@ fun main() {
     }
 }
 
-fun move_(currentItem: Int, indexCupMap: MutableMap<Int, Int>, cupIndexMap: MutableMap<Int, Int>): Int {
-    val currIndex = cupIndexMap[currentItem]!!
-    val pickupItems = mutableListOf<Int>()
-    for (i in 1..3) {
-        val itemIndex = (currIndex + i) % indexCupMap.size
-        val item = indexCupMap[itemIndex]!!
-        pickupItems.add(item)
-        cupIndexMap[item] = -1
-        indexCupMap[itemIndex] = -1
-    }
-
-
-    return 0
-}
-
 fun move(currentItem: Int, cups: MutableList<Int>, cupIndexMap: MutableMap<Int, Int>): Int {
     log("cups: $cups")
     log("currItem $currentItem")

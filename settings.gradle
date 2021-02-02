@@ -1,4 +1,4 @@
-rootProject.name = 'adventurecode2020'
+rootProject.name = 'adventurecode'
 
 include '2020day01'
 include '2020day02'
